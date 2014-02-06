@@ -19,7 +19,7 @@ In addition- users, and especially preferred users and admins- can effect on the
 
 # Architecture
 ## Overview
-Our application was designed so that it could easily be changed to be a different PR application- by simply changing the keywords used for the article searching and analysis, the application can allow searching of articles on about any subject, thus allowing company representatives to easily find and comment on negative articles on their company.
+The application was designed so that it could easily be changed to be a different PR application- by simply changing the keywords used for the article searching and analysis, the application can allow searching of articles on about any subject, thus allowing company representatives to easily find and comment on negative articles on their company.
 Backend
 
 ## Backend
@@ -40,4 +40,24 @@ Consists page handlers, templates, javascript and JQuery scripts. Responsible fo
 * Articles addition- allow users to manually add new articles easily using a special bookmarklet / favorites button.
 * Language support- Spanish is also supported in addition to English, and other languages which are supported by google news can be easily added later.
 * Facebook integration- Turn iLike-IL into a Facebook application.
+
+# Implemented Technologies
+iLike-IL is written in python, and designed in HTML over Google App engine.
+Our application utilizes the following Google App Engine APIs:
+* The Datastore
+* Scheduled Tasks (Cron jobs)
+* Memory caching - memcache
+* Task queues
+Additional technologies and APIs used in our application:
+* YouTube Data API (for the YouTube feeds)
+* Janrain API (for the multiple-platform login)
+* Facebook API (for the application)
+* JQuery Framework - for most of the Javascript in the system, especially for the client-side AJAX.
+* JQuery UI - for most of our client-side UI features
+* DateUtil - for easy parsing of dates (from manually-added articles)
+* Google News RSS feeds – not an official API, but we use it anyway
+* Google Analytics – monitoring users and interactions
+iLikeIL - Project Documentation Page 15
+* Google AppStats – profiling our app in detail
+* BeautifulSoup – parsing html from source sites and Google News
 
