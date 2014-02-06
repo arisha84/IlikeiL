@@ -1,0 +1,232 @@
+{% extends "main.html" %}
+{% block head %}<link type="text/css" rel="stylesheet" href="static/admin.css">
+<link type="text/css" rel="stylesheet" href="static/jquery-ui-1.7.3/css/ui-lightness/jquery-ui-1.7.3.custom.css">
+<script src="static/jquery-ui-1.7.3/js/jquery-ui-1.7.3.custom.min.js"></script>
+<script>
+    $(function() {
+
+        if ($.browser.msie) {
+            if (parseInt($.browser.version) == 8) {
+                return;
+            }
+        }
+
+
+       $("#admin_container").tabs();
+    });
+</script>
+{% endblock %}
+{% block user %}
+<span class="menulinks">
+	     {{utext}}
+	     </br>	     
+	       {% if user %}
+	       {% if admin %}
+	       		<a href="/admin">Admin</a>
+	       	{% endif %}
+	     	<a href="/?commented=true"><img title="Commented articles" style="height:15px;width:15px" src="/static/icommented50.png" ></img>My Comments</a>
+	     	<a href="/?starred=true"><img title="Favourite articles" style="height:15px;width:15px" src="/static/full-star.gif" ></img>Favorites</a>
+	     {% endif %}
+ 	  </span>
+{% endblock %}
+{% block content %}
+<div id="admin_container" class="content">
+    <ul>
+            <li><a href="#tab_tips">Tips</a></li>
+            <li><a href="#tab_keywords">Keywords</a></li>
+            <li><a href="#tab_sources">Sources</a></li>
+            <li><a href="#tab_users">Users</a></li>
+    </ul>
+    <div id="tab_tips">
+   <form action="/tip" method="post">
+   	<h3>Tips</h3>         
+         <table class="formtable">
+          <tr>
+           <th>Title </th>
+           <td><input name="title" {% if tip.title %}value="{{tip.title}}"{% else %} value="title goes here" onfocus="value='';onfocus=''"{%endif%}></td>
+          </tr>
+          <tr>
+           <th>URL </th>
+           <td><input id="url" name="url" {% if tip.url %}value="{{tip.url}}"{% else %} value="url of the tip" onfocus="value='';onfocus=''"{%endif%}/></td>
+           <td><button type="button" onclick="javascript:document.location=window.location.href.split('/')[0]+'/admin?tipurl='+document.getElementById('url').value;">Get meta-data from URL</button></td>
+          </tr>
+          <tr>
+           <th>Keywords </th>
+           <td><input autocomplete="off" id="keywords" name="keywords" value="keyword1, keyword2, keyword3" onfocus="value='';onfocus=''"/></td>
+           
+           <script type="text/javascript">
+          $(document).ready(function() {     
+        $("#keywords").autocomplete(
+            [{%for keyw in keywords%}
+                    "{{keyw.text}}",
+             {%endfor%}''],
+            {
+                delay:1,
+                minChars:1,
+                matchSubset:1,
+                autoFill:true,
+                maxItemsToShow:10,
+                multiple:true,
+                multipleSeparator: ", " 
+            }
+        );
+    });
+     </script>
+          </tr>
+		  <tr>
+           <th>Description</th>
+           <td><textarea rows="3" name="description" {%if not tip.desc%}onfocus="this.value='';this.onfocus=''"{%endif%}>{% if tip.desc %}{{tip.desc}}{%else%}this description will appear in the tip box{%endif%}</textarea></td>
+          </tr>
+		  <tr>
+           <th>Thumbnail URL</th>
+           <td><input name="thumb" {%if tip.pic_url%}value="{{tip.pic_url}}"{%else%}value="a small image related to the tip subject" onfocus="value='';onfocus=''"{%endif%}/></td>
+          </tr>
+		  <tr>
+           <th>Source</th>
+           <td><input name="source" {%if tip.source%}value="{{tip.source}}"{%else%}value="for example, standwithus" onfocus="value='';onfocus=''"{%endif%}/></td>
+          </tr>		  
+		  <tr>
+           <th>Language</th>
+           <td>
+            <select name="language">
+                <option value="english" selected>English</option>
+                <option value="spanish">Spanish</option>
+            </select>
+            </td>     
+          </tr>
+         </table>         
+          <tr>
+           <td>
+            <span><input type="submit" value="Add tip"></span>
+           </td>         
+           <td>
+            {%if errTip%}
+             <span class = "errMsg">{{errTip}} </span>
+            {%endif%}
+           </td>         
+          </tr>                           
+   </form></div><div id="tab_keywords">
+   <div class="box">   
+   <form action="/keyword" method="post">        
+    	<h3>Keywords</h3>
+	     <table class="formtable">
+          <tr>
+           <th>Text </th>
+           <td><input name="text"></td>     
+          </tr>
+          <tr>
+           <th>Weight </th>
+           <td>
+            <select name = "weight" >
+              <option value="3"> High</option>
+              <option value="2"> Medium</option>
+			  <option value="1"> Low</option>			  
+			</select>           
+           </td>     
+          </tr>         
+         </table>                                              
+           <span><input type="submit" value="Add keyword"></span>             
+           {%if err%}
+            <span class = "errMsg">{{err}} </span>
+           {%endif%}               
+  </form>
+  </div>
+    
+  <!--this part displayes the keyWords table-->
+  <div class="box">  
+  <form action="/keyword_edit" method="post">
+  <div class="scrollable">
+   <table class="sourcetable" cellspacing="0px" cellpadding="0px" >
+    <tr>
+     <th>KeyWord</th>
+     <th>Weight</th>     
+    </tr>
+    {% for keyword in keywords %}
+    <tr>
+     <td class="sourcetitle">{{keyword.text}}</td>
+     <td>
+             <select name="keyword_{{keyword.key}}">
+                <option value="3" {% ifequal keyword.weight 3 %} selected {% endifequal %}>High</option>
+                <option value="2" {% ifequal keyword.weight 2 %} selected {% endifequal %}>Medium</option>
+                <option value="1" {% ifequal keyword.weight 1 %} selected {% endifequal %}>Low</option>
+                <option value="0" {% ifequal keyword.weight 0 %} selected {% endifequal %}>Remove </option>
+            </select>
+      </td>
+    <tr/> 
+    {% endfor %}       
+   </table> 
+   </div>
+   <input type="submit" value="apply" />
+   <input type="button" value="cancel" onclick="window.location.reload();" />
+   </form>
+  </div></div><div id="tab_sources">
+  <!--this part displayes the sources table-->
+  <div class="box">
+  <h3>Sources </h3>
+  <form action="/source" method="post">
+  <div class="scrollable">
+   <table class="sourcetable" cellspacing="0px" cellpadding="0px" >
+    <tr>
+     <th>Source</th>
+     <th>Importance</th>
+     <th>Volatile</th>
+    </tr>
+    {% for source in sources %}
+    <tr>
+     <td class="sourcetitle">{{source.name}}</td>
+     <td>
+             <select name="source_{{source.key}}" onclick="this.name = this.name+'%'">
+                <option value="3" {% ifequal source.weight 3 %} selected {% endifequal %}>High</option>
+                <option value="2" {% ifequal source.weight 2 %} selected {% endifequal %}>Medium</option>
+                <option value="1" {% ifequal source.weight 1 %} selected {% endifequal %}>Low</option>
+                <option value="0" {% ifequal source.weight 0 %} selected {% endifequal %}>Remove </option>
+            </select>
+      </td>
+      <td>
+             <select name="volsource_{{source.key}}">
+                <option value="True" {% if source.volatile %} selected {% endif %}>True</option>
+                <option value="False" {% if not source.volatile %} selected {% endif %}>False</option>
+            </select>
+      </td>
+    <tr/> 
+    {% endfor %}       
+   </table> 
+   </div>
+   <input type="submit" value="apply" />
+   <input type="button" value="cancel" onclick="window.location.reload();" />
+  </form>
+  </div>    
+  <!--this part displayes the userss table-->
+  </div><div id="tab_users">
+  <div class="box">
+  <h3>Users </h3>
+  <form action="/user_edit" method="post">
+  <div class="scrollable">
+   <table class="sourcetable" cellspacing="0px" cellpadding="0px" >
+    <tr>
+     <th>User</th>
+     <th>Level</th>     
+    </tr>
+    {% for user in users %}
+    <tr>
+     <td class="sourcetitle">{{user.name}}</td>
+     <td>
+             <select name="user_{{user.key}}">                
+                <option value="3" {% ifequal user.user_level 3 %} selected {% endifequal %}>Admin</option>
+                <option value="2" {% ifequal user.user_level 2 %} selected {% endifequal %}>PowerUser</option>
+                <option value="1" {% ifequal user.user_level 1 %} selected {% endifequal %}>RegularUser</option>                
+                <option value="0" {% ifequal user.user_level 0 %} selected {% endifequal %}>Remove </option>
+             </select>
+     </td>
+    <tr/> 
+    {% endfor %}       
+   </table> 
+   </div>
+   <input type="submit" value="apply" />
+   <input type="button" value="cancel" onclick="window.location.reload();" />
+  </form>
+  </div>
+  <div>     
+   <p><br/><a href = "fetch">Fetch new articles</a></p>
+  </div> </div></div>
+{% endblock %}

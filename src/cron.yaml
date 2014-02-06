@@ -1,0 +1,12 @@
+cron:
+- description: fetch news every 60 mins
+  url: /prepare_fetch
+  schedule: every 60 minutes
+  
+- description: update articles importance every 60 mins
+  url: /recalculate
+  schedule: every 60 minutes
+  
+- description: Remove old entries from db once a week
+  url: /cleandb
+  schedule: every 12 hours

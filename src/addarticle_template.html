@@ -1,0 +1,54 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+<div class="content">
+<div style="padding-left: 90px">
+    <h2>Suggest an article for iLike-IL</h2>
+    <form method="POST" action="?addarticle">
+    <table>
+        <tr><td>URL:</td><td><input type="textbox" size="50" id="url" name="url" value="{{article.url}}"/></td><td><button type="button" onclick="javascript:document.location=window.location.href.split('?')[0]+'?url='+document.getElementById('url').value;">Get meta-data from URL</button></td></tr>
+        <tr><td>Title:</td><td><input type="textbox" size="50" name="title" value="{{article.title}}"/></td></tr>
+        <tr><td>Description:</td><td><textarea rows="5" cols="50" name="desc">{{article.desc}}</textarea></td></tr>
+        <tr><td>Date:</td><td><input type="textbox" size="50" name="date" value="{{article.created}}"/></td></tr>
+        <tr><td>Source (what site is it from):</td><td><input type="textbox" size="50" name="source" value="{{article.source}}"/></td></tr>
+        <tr><td>Thumbnail:</td><td><input type="textbox" size="50" name="pic_url" value="{{article.pic_url}}"/>{%if article.pic_url%}<br/><img src="{{article.pic_url}}" class="thumb"/>{%endif%}</td></tr>
+    </table>
+        <input type="submit" value="Submit to iLike-IL"/>
+    </form>
+    <br>
+    <h4>Add our bookmarklet to suggest articles easier in the future! <a href="javascript:(function(){var%20l='http:'+'//'+'israel-like.appspot.com/static/bkmrklt.js';var%20n=document.createElement('script');n.setAttribute('language','JavaScript');n.setAttribute('src',l);document.body.appendChild(n);})()" title="Suggest to iLike-IL" onclick="javascript:window.alert('Drag this link to your bookmark bar (or Add To Favorites if you are on Internet Explorer).')">Suggest an article for iLike-IL</a></h4>
+</div></div>
+{% endblock %}
+
+
+{% block bottom %}
+    <table width="95%" align="center" cellpadding="3" cellspacing="0" bgcolor="#C3D9FF" style="margin-bottom:5">
+  <tbody><tr>
+  <td class="bubble tl" align="left" valign="top"><div class="SPRITE_corner_tl"></div></td>
+  <td class="bubble" rowspan="2" style="text-align:left">
+  <div align="center">
+  <font size="-1" color="#666666">TAU Google Technologies for Cloud Development Workshop 2010
+  <a href="about">About</a> -
+  <a href="http://code.google.com/p/ilikeil/">Development</a> -
+  <a href="support">Support</a>
+  </font>
+  </div>
+  </td>
+  <td class="bubble tr" align="right" valign="top"><div class="SPRITE_corner_tr"></div></td>
+  </tr>
+  <tr>
+  <td class="bubble bl" align="left" valign="bottom"><div class="SPRITE_corner_bl"></div></td>
+  <td class="bubble br" align="right" valign="bottom"><div class="SPRITE_corner_br"></div></td>
+  </tr>
+</tbody></table>
+    <script type="text/javascript">
+  var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
+  document.write(unescape("%3Cscript src='" + rpxJsHost +
+"rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  RPXNOW.overlay = true;
+  RPXNOW.language_preference = 'en';
+</script>
+{% endblock %}

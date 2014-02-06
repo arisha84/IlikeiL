@@ -1,0 +1,48 @@
+td
+{
+	width: 100px;
+}
+th
+{
+	width: 100px;
+	text-align: left;
+}
+.formtable
+{
+	width: 600px;
+}
+.formtable input, .formtable textarea, .formtable select
+{
+	width: 250px;
+}
+.grid td
+{
+	border: 1px solid #cccccc
+}
+
+
+.box
+{
+	/*border: 1px solid #cccccc*/
+}
+.scrollable
+{
+    height: 200px;
+    width: 430px;
+    overflow-y: auto;
+	border-bottom: solid silver 1px;
+	border-top: solid silver 1px;
+}
+.sourcetable
+{
+    width: 400px;
+}
+.sourcetable select
+{
+	width: 100px;
+}
+.sourcetitle
+{
+    color: navy;
+    font-size: 0.8em;
+}

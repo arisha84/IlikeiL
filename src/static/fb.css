@@ -1,0 +1,41 @@
+body {
+	overflow-x: hidden;
+}
+.articlebox  {
+	border-bottom:0 solid #CCCCCC;
+	clear:none;
+	color:#333333;
+	float:left;
+	font-size:0.85em;
+	height:110px;
+	padding-top:20px;
+	width:368px;
+}
+.topcenter {
+	margin:0 auto;
+	width:740px;	
+}
+
+.articlebox a {
+	font-size:1.02em;
+}
+
+.articlebox-text {
+    float: left;
+    margin-left: 5px;
+    width: 233px;
+}
+
+.content {
+    width: 740px;
+	margin: 0 auto;
+}
+
+
+.menulinks 
+{
+	width: 105px;
+	font-size: 0.8em;
+	float: right;
+	padding: 0px;
+}

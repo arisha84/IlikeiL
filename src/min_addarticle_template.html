@@ -1,0 +1,16 @@
+<html><body bgcolor="#ffffff">
+<div class="content">
+<div style="padding-left: 15px">
+    <form method="POST" action="?min=y">
+    <table>
+        <tr><td>URL:</td><td><input type="textbox" size="50" id="url" name="url" value="{{article.url}}"/></td><td><button type="button" onclick="javascript:document.location=window.location.href.split('?')[0]+'?url='+document.getElementById('url').value;">Get meta-data from URL</button></td></tr>
+        <tr><td>Title:</td><td><input type="textbox" size="50" name="title" value="{{article.title}}"/></td></tr>
+        <tr><td>Description:</td><td><textarea rows="5" cols="50" name="desc">{{article.desc}}</textarea></td></tr>
+        <tr><td>Date:</td><td><input type="textbox" size="50" name="date" value="{{article.created}}"/></td></tr>
+        <tr><td>Source (what site is it from):</td><td><input type="textbox" size="50" name="source" value="{{article.source}}"/></td></tr>
+        <tr><td>Thumbnail:</td><td><input type="textbox" size="50" name="pic_url" value="{{article.pic_url}}"/>{%if article.pic_url%}<br/><img src="{{article.pic_url}}" class="thumb"/>{%endif%}</td></tr>
+    </table>
+        <input type="submit" value="Submit to iLike-IL"/>
+    </form>
+</div></div>
+</body></html>

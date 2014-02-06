@@ -1,0 +1,98 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <h3>Popular</h3>
+    
+    {% for article in articles|slice:"4" %}
+
+    
+	<div class="articlebox">
+        <a href="article?key={{article.key}}" title="{{article.title}}" style="float: left; ">
+                 
+        <img
+		{% if article.pic_url %}
+		src="{{article.pic_url}}" 
+		{% else %}
+		src="/static/logo80.jpg" 
+		{% endif %}
+        
+		class="thumb"/>        
+
+		</a>
+        <div style="width: 300px; margin-left: 15px; float: left;">            
+              {% if article.latest_activity.commented %}
+            <img title="I commented on this article" style="height:15px;width:15px" src="/static/icommented50.png" ></img>
+            {% endif %}
+            {% if article.latest_activity.starred %}
+            <img title="Favourite article" style="height:15px;width:15px" src="/static/full-star.gif" ></img>
+            {% endif %}            
+            {% if article.latest_activity.inc %}
+            <img title="Marked relevant" style="height:15px;width:15px" src="/static/like.gif" ></img>
+            {% endif %}
+            {% if article.latest_activity.dec %}
+            <img title="Marked relevant" style="height:15px;width:15px" src="/static/dislike.gif" ></img>
+            {% endif %}
+            <b style="margin-bottom: 5px; height: 30px;">
+			<a href="article?key={{article.key}}">
+            {{article.title}}</a></b>
+            
+            <div>{{article.desc|slice:"100"}}...</div>
+            <span class="source">by {{article.source}} | {{article.pretty_date}} | <b>views:{{article.usersViewed}}</b> | 
+            
+            {% ifequal article.usersCommented 0 %}
+              <a style="color:gray" href="article?key={{article.key}}">Be the first to comment!</>
+            {% else %}
+              comments:{{article.usersCommented}}
+            {% endifequal %}
+              </span>
+        </div>
+    </div>
+    {% endfor %}
+    
+  
+{% endblock %}
+
+{% block bottom %}
+    <div class="paginator">
+        {% if prev_url %}
+            <a style="float: left; " href="{{prev_url}}" ><div class="prevbutton"></div>Previous</a>
+        {% endif %}  
+        {% if hasnextpage %}
+            <a style="float: right; " href="{{next_url}}" ><div class="nextbutton"></div>Next</a>
+        {% endif %}  
+        
+    </div>
+    
+    <table width="95%" align="center" cellpadding="3" cellspacing="0" bgcolor="#C3D9FF" style="margin-bottom:5">
+  <tbody><tr>
+  <td class="bubble tl" align="left" valign="top"><div class="SPRITE_corner_tl"></div></td>
+  <td class="bubble" rowspan="2" style="text-align:left">
+  <div align="center">
+  <font size="-1" color="#666666">2010 TAU Google Workshop
+  {% if admin %}
+  <a href="admin">Admin</a> -
+  {% endif %}
+  <a href="about">About</a> -
+  <a href="http://code.google.com/p/ilikeil/">Development</a> -
+  <a href="terms">Terms</a>
+  - <a href="support">Help</a>
+  </font>
+  </div>
+  </td>
+  <td class="bubble tr" align="right" valign="top"><div class="SPRITE_corner_tr"></div></td>
+  </tr>
+  <tr>
+  <td class="bubble bl" align="left" valign="bottom"><div class="SPRITE_corner_bl"></div></td>
+  <td class="bubble br" align="right" valign="bottom"><div class="SPRITE_corner_br"></div></td>
+  </tr>
+</tbody></table>
+    <script type="text/javascript">
+  var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
+  document.write(unescape("%3Cscript src='" + rpxJsHost +
+"rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  RPXNOW.overlay = true;
+  RPXNOW.language_preference = 'en';
+</script>
+{% endblock %}

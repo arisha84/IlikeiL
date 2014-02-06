@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title> [iLike-IL] {{article.title}} </title>
+                <script src="static/jquery-1.4.2.min.js"></script>
+
+
+                <meta name="title" content="[iLike-IL] {{article.title}}" />
+                <meta name="description" content="Come help me explain our side of the story on iLike-IL" />
+                <link rel="image_src" href="{{article.pic_url}}" />
+
+                <link rel="stylesheet" type="text/css" href="static/styles.css" />
+
+
+                <script>
+                    $(document).ready(function() {
+                        FB.init({ apiKey: 'a455f3f21ce31633c82d263fd5fa0aa8' });
+                    });
+
+                    function clk_commented() {
+                        if ({{user_weight}} == 0) {
+                            window.alert("You must be logged in to do that. Please log-in, it's easy and free.");
+                            return false;
+                        }
+
+                        jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "commented" },
+                            function(data){
+                                location.href="/";
+                            }
+                        );
+
+                            FB.ui({
+                             method: 'stream.publish',
+                             message: 'Help me explain our side of the story!',
+                             attachment: {
+                               name: '{{article.title}}',
+                               caption: 'Help explain our side of the story by commenting in the comments section of this article',
+                               href: '{{URL}}',
+                               media: [ { type: 'image', src: 'http://israel-like.appspot.com/static/.png', href: '{{URL}}' } ]
+                             },
+                             action_links: [
+                               { text: 'iLike-IL App', href: 'http://apps.facebook.com/ilike-il/' }
+                             ],
+                             user_message_prompt: 'Spread the word about this article so your friends can help too:'
+                           });
+                    }
+                </script>
+	</head>
+
+        <style>#outer-separator{clear:both;width:100%;border-bottom:2px solid #404040;border-top:1px solid #a0a0a0;margin:0px 0 0;padding:0;font-size:1px;overflow:hidden}#separator{background:#eaeaea;height:3px}table{font-size:100%}</style>
+
+	<body style="margin: 0px">
+            <div id="fb-root"></div>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+		<table cellpadding=0 cellspacing=0 height="100%" width="100%" border="0">
+<tr height="1px"><td colspan="3" style="top:0;width:100%"><div class=std style="background:#ebeff9;padding:3px 3px"><a href="/" style="text-decoration:none; color: black;"><img src="http://ilikeil.googlecode.com/svn/trunk/src/static/logo-heart.jpg" style="padding:0;margin:0;vertical-align:middle;border:0;" title="Back ari to iLike-IL Home" alt="Back to iLike-IL Home" width=72 height=24> Back to iLike-IL Home </a>
+        <a href="{{article.url}}" style="padding-left: 80px; padding-top: 3px; text-decoration: none; color: black">Link to original article</a>
+            &nbsp;|&nbsp;
+            <a href="/article?key={{article.key}}" style="text-decoration: none; color: black;">Restore original frame</a>
+            {% if not did_user_already_comment %}&nbsp;|&nbsp;<a href="#" style="text-decoration:none; color:black;" onclick="javascript:clk_commented();">
+        <img src="static/badge.png" width="20px" height="20px"><font size="3px"> I commented on this article</font>
+        </a>{% endif %}
+            
+<div style="float: right; padding-top: 3px; padding-right: 10px;">{{utext}}</div></td></tr>
+
+<tr height="1px"><td colspan=3><div id=outer-separator><div id=separator></div></div></td></tr>
+
+<tr><td colspan="3">
+		<iframe allowtransparency=true frameborder=0 id=rf sandbox="allow-same-origin allow-forms allow-scripts" scrolling=auto src="{{article.url}}" style="width:100%;height:100%"></iframe>
+
+		</table>
+            <script type="text/javascript">
+  var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
+  document.write(unescape("%3Cscript src='" + rpxJsHost +
+"rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  RPXNOW.overlay = true;
+  RPXNOW.language_preference = 'en';
+</script>
+	</body>
+	<script>var a = document.getElementById('rf');a && a.contentWindow && a.contentWindow.focus();</script>
+</html>

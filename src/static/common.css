@@ -1,0 +1,209 @@
+form, body 
+{
+	margin:0px; padding:0px;
+}
+body
+{
+	font-family: verdana; /*arial,sans-serif;*/
+	font-size:small;
+} 
+
+td
+{
+	margin:0px; padding:0px;
+}
+img
+{
+	border: 0px;
+}
+ul{
+	list-style-type: none;
+	padding: 0;
+	margin:5px 10px 10px 15px;
+}
+ol 
+{
+    margin-top:5px;
+}
+h3
+{
+	font-family: "Trebuchet MS";
+	color: navy;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border-bottom: 1px solid #cccccc;
+}
+
+table
+{
+	border-spacing: 0px;
+}
+.topcenter {
+	margin:0 auto;
+	width:1000px;	
+}
+.content {
+	background-color:#FFFFFF;
+	border:0px solid silver;
+	border-top:0px;
+	border-bottom:0px;
+
+	clear:both;
+	margin:0 auto;
+	width:1000px;	
+
+}
+.explanation
+{
+	font-family: "Trebuchet MS";
+	padding-left: 20px;
+}
+.facelist 
+{   
+    list-style:none;
+}
+
+.facelist li 
+{   
+    padding-left: -10px;
+}
+.menu 
+{
+ /* background-color: #f1f4fd; @@ari - orig*/ 
+ /*  background-color: orange; */
+ background-image: url(/static/psd-banner-ilike1000023.png);
+}
+
+.menudiv
+{
+	/*background-color: #f1f4fd; /*@@ari - orig  */
+	/*background-color: rgb(20,103,194);*/
+	/*@@ari*/
+	/*background-image: url(/static/psd-banner-ilike123.png);*/
+	margin: 0 auto;
+	border-bottom: 5px solid navy;
+}
+
+.menulinks 
+{
+	width: 333px;
+	font-size: 1.01em;
+	float: right;
+	padding: 30px;
+	
+}
+.menulinks a /* for all links in the menu */
+{
+	color: white;
+}
+
+
+.search {
+	padding:30px;
+	width: 600px;
+
+}
+
+.paginator
+{	
+	overflow: hidden;
+	font-size: 0.8em;	
+}
+
+.paginator a
+{
+	color: blue;
+}
+
+.test a
+{
+	color: white;	
+}
+
+.test 
+{
+	color: white;	
+}
+
+.nextbutton, .prevbutton
+{
+	display: block;
+    width: 32px;
+    height: 32px;
+	cursor: pointer;
+	color: blue;
+	
+}
+.nextbutton
+{	
+    background: transparent url(/static/jcarousel/skins/tango/next-horizontal.png) no-repeat 0 0;
+}
+.prevbutton
+{
+    background: transparent url(/static/jcarousel/skins/tango/prev-horizontal.png) no-repeat 0 0;
+}
+.slogan
+{
+	position: absolute;
+	left: 90px;
+	top: 58px;
+	color: gray;
+	font-style: italic;
+	font-weight: bold;
+	font-famaly: Comic Sans MS;
+	font-size: 0.8em;
+}
+.topbar
+{
+	height:30px;
+	background-color:navy;
+	
+	
+}
+
+
+
+.source
+{
+	padding: 2px;
+	color: gray;
+	font-style: italic;
+}
+
+.hottopics
+{
+	color: white;
+	font-family: "verdana";
+	font-style: italic;
+	font-size: 0.8em;
+}
+.keywords a, .tagcloud a
+{
+	padding: 2px;
+	color: white;
+	/*font-weight: bold;*/
+	cursor: hand;
+}
+
+.thumb
+{
+	padding: 1px;
+	width: 120px;
+	height: 90px;
+}
+
+.errMsg
+{
+	color: red; 
+	font-style: italic;
+	font-size: 0.7em;
+}
+
+.searchdiv
+{
+	padding-left:25px;padding-top:10px;width:300px; height:50px;
+}
+.userlinks
+{
+	width: 200px;
+}

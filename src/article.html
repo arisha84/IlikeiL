@@ -1,0 +1,476 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>[ilike-il] {{article.title}}</title>
+        <link rel="icon" type="image/vnd.microsoft.icon" href="static/heart.ico">
+        <!--<script src="static/jquery-1.4.2.min.js"></script>
+        <script src="static/jquery-ui-1.8.custom.min.js"></script>-->
+        <meta name="title" content="[iLike-IL] {{article.title}}" />
+        <meta name="description" content="Come help me explain our side of the story on iLike-IL" />
+        <link rel="image_src" href="{{article.pic_url}}" />
+        <script type="text/javascript" src="static/jcarousel/lib/jquery-1.2.3.pack.js">
+        </script>
+        <script type="text/javascript" src="static/jcarousel/lib/jquery.jcarousel.pack.js">
+        </script>
+        <script type="text/javascript" src="static/jquery-tooltip/jquery.tooltip.pack.js">
+        </script>
+        <link rel="stylesheet" type="text/css" href="static/common.css" />
+		<link type="text/css" rel="stylesheet" href="static/boxes.css">
+        <link rel="stylesheet" type="text/css" href="static/jcarousel/lib/jquery.jcarousel.css" />
+        <link rel="stylesheet" type="text/css" href="static/jcarousel/skins/tango/skin.css" />
+        <link rel="stylesheet" href="static/jquery-tooltip/jquery.tooltip.css" />
+        <!--<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>-->
+        <style>
+            
+            /**
+             *  Vertical Buttons
+             */
+            .down-vertical {
+                position: absolute;
+                width: 32px;
+                height: 32px;
+                cursor: pointer;
+                background: transparent url(static/jcarousel/skins/tango/next-vertical.png) no-repeat 0 0;
+            }
+            
+            .down-vertical:hover {
+                background-position: 0 -32px;
+            }
+            
+            .down-vertical:active {
+                background-position: 0 -64px;
+            }
+            
+            .down-vertical-disabled, .down-vertical-disabled:hover, .down-vertical-disabled:active {
+                cursor: default;
+                background-position: 0 -96px;
+            }
+            
+            .up-vertical {
+                position: absolute;
+                width: 32px;
+                height: 32px;
+                cursor: pointer;
+                background: transparent url(static/jcarousel/skins/tango/prev-vertical.png) no-repeat 0 0;
+            }
+            
+            .up-vertical:hover {
+                background-position: 0 -32px;
+            }
+            
+            .up-vertical:active {
+                background-position: 0 -64px;
+            }
+            
+            .up-vertical-disabled, .up-vertical-disabled:hover, .up-vertical-disabled:active {
+                cursor: default;
+                background-position: 0 -96px;
+            }
+            
+            .activity-level-high {
+                background: no-repeat url(static/activity-level.png) 0 0;
+                width: 16px;
+                height: 16px;
+                display: inline-block;
+            }
+            
+            .activity-level-low {
+                background: no-repeat url(static/activity-level.png) 0 -16px;
+                width: 16px;
+                height: 16px;
+                display: inline-block;
+            }
+            
+            .activity-level-medium {
+                background: no-repeat url(static/activity-level.png) -16px 0;
+                width: 16px;
+                height: 16px;
+                display: inline-block;
+            }
+            
+            .activity-level-none {
+                background: no-repeat url(static/activity-level.png) -16px -16px;
+                width: 16px;
+                height: 16px;
+                display: inline-block;
+            }
+			
+			.toolkit {
+				height: 100%;
+				width: 100%;
+			}
+        </style>
+        <script>
+                                                        var relev = {{article.weight}};                                                        
+                                                        var is_starred = "{{is_starred}}";
+                                                        var rel_value = {{rel_value}};
+                                                        var user_weight = {{user_weight}};
+                                    
+                                    
+                                                        function starclick() {
+                                                            if (user_weight == 0) {
+                                                                window.alert("You must be logged in to do that. Please log-in, it's easy and free.");
+                                                                return false;
+                                                            }
+                                                            if (is_starred == "True") {
+                                                                is_starred = "False";
+                                                                jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "unstarred" } );
+                                                            } else {
+                                                                is_starred = "True";
+                                                                jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "starred" } );
+                                                            }
+                                                            setStarredText();
+                                                        }
+                                    
+                                                        function setStarredText() {
+                                                            var star = '';
+                                                            var txt = ''
+                                                            if (is_starred == "True") {
+                                                                star = 'full-star.gif';
+                                                            } else {
+                                                                star = 'empty-star.gif';
+                                                                txt = '<font size="2.5px">Star this article!</font>';
+                                                            }
+                                                            
+                                                            jQuery("#starred").html('<a href="#" onclick="javascript:starclick();" style="text-decoration:none; color:black;"><img width="19px" height="19px" src="static/'+star+'"> '+txt+'</a>');
+                                                            
+                                                        }
+                                    
+                                    
+                                                        function getArticleRelevanceString() {
+                                                            if (relev < 50) {
+                                                                return 'activity-level-none';
+                                                            }
+                                                            else if (relev <= 100) {
+                                                                return 'activity-level-low';
+                                                            }
+                                                            else if (relev <= 170) {
+                                                                return 'activity-level-medium';
+                                                            }
+                                                            else {
+                                                                return 'activity-level-high';
+                                                            }
+                                                        }
+
+                                                        function getArticleRelevanceString2() {
+                                                            if (relev < 50) {
+                                                                return 'Very Low';
+                                                            }
+                                                            else if (relev <= 100) {
+                                                                return 'Low';
+                                                            }
+                                                            else if (relev <= 170) {
+                                                                return 'Medium';
+                                                            }
+                                                            else {
+                                                                return 'Hot';
+                                                            }
+                                                        }
+                                    
+                                                        function incrementRelevance() {
+                                                            if (user_weight == 0) {
+                                                                window.alert("You must be logged in to do that. Please log-in, it's easy and free.");
+                                                                return false;
+                                                            }
+                                                            if (rel_value == 1) {
+                                                                rel_value = 0;
+                                                                relev = Math.max((relev - user_weight),0);
+                                                                jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "uninc" } );
+                                                            } else {
+                                                                if (rel_value == -1) {
+                                                                    decrementRelevance();
+                                                                }
+                                                                rel_value = 1;
+                                                                relev = Math.max((relev + user_weight),0);
+                                                                jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "inc" } );
+                                                            }
+                                                            setRelevanceText();
+                                                        }
+                                    
+                                                        function decrementRelevance() {
+                                                            if (user_weight == 0) {
+                                                                window.alert("You must be logged in to do that. Please log-in, it's easy and free.");
+                                                                return false;
+                                                            }
+                                                            if (rel_value == -1) {
+                                                                rel_value = 0;
+                                                                relev = Math.max((relev + user_weight),0);
+                                                                jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "undec" } );
+                                                            } else {
+                                                                if (rel_value == 1) {
+                                                                    incrementRelevance();
+                                                                }
+                                                                rel_value = -1;
+                                                                relev = Math.max((relev - user_weight),0);
+                                                                jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "dec" } );
+                                                            }
+                                                            setRelevanceText();
+                                                        }
+                                    
+                                                        function setRelevanceText() {
+                                                            var like = 'like.gif';
+                                                            var dislike = 'dislike.gif';
+                                                            
+                                                            if (rel_value == -1) {
+                                                                dislike = 'dislike-dis.gif';
+                                                            }
+                                                            else if (rel_value == 1) {
+                                                                like = 'like-dis.gif';
+                                                            }
+
+
+                                    
+                                                            //jQuery('#relevance-text').html('<font size="2.5px">Relevance:</font>&nbsp;'+relev+'&nbsp;<span class="'+getArticleRelevanceString()+'"></span>&nbsp;<a href="#"><img src="static/'+like+'" width="19px" height="19px" alt="This article is relevant and needs more commentors!" onclick="javascript:incrementRelevance();"></a>&nbsp;<a href="#"><img src="static/'+dislike+'" width="19px" height="19px" alt="This article is irrelevant and does not need any more help!" onclick="javascript:decrementRelevance();"></a>');
+                                                            jQuery('#relevance-text').html('<font size="2.5px">Relevance:</font>&nbsp;'+getArticleRelevanceString2()+'&nbsp;<span class="'+getArticleRelevanceString()+'"></span>&nbsp;<a href="#"><img src="static/'+like+'" width="19px" height="19px" alt="This article is relevant and needs more commentors!" onclick="javascript:incrementRelevance();"></a>&nbsp;<a href="#"><img src="static/'+dislike+'" width="19px" height="19px" alt="This article is irrelevant and does not need any more help!" onclick="javascript:decrementRelevance();"></a>');
+                                                        }
+                                    
+                                                        jQuery(document).ready(function() {
+                                                            jQuery('#mycarousel').jcarousel({
+                                                                scroll: 1
+                                                            });
+                                    
+                                                            setRelevanceText();
+                                                            setStarredText();
+                                    
+                                                            $('#relevance-text').tooltip({
+                                                                track: true,
+                                                                showURL: false,
+                                                                showBody: " - ",
+                                                                fade: 250
+                                                            });
+                                    
+                                                            $('#starred').tooltip({
+                                                                track: true,
+                                                                showURL: false,
+                                                                showBody: " - ",
+                                                                fade: 250
+                                                            });
+                                    
+                                                            $('#acommented').tooltip({
+                                                                track: true,
+                                                                showURL: false,
+                                                                showBody: " - ",
+                                                                fade: 250
+                                                            });
+                                    
+                                                            $('#anocomments').tooltip({
+                                                                track: true,
+                                                                showURL: false,
+                                                                showBody: " - ",
+                                                                fade: 250
+                                                            });
+                                    
+                                                            $('#anotrelevant').tooltip({
+                                                                track: true,
+                                                                showURL: false,
+                                                                showBody: " - ",
+                                                                fade: 250
+                                                            });
+                                    
+                                                            FB.init({ apiKey: 'a455f3f21ce31633c82d263fd5fa0aa8' });
+                                                            FB.XFBML.parse();
+                                    
+                                    
+                                                        });
+                                    
+                                                        function clk_commented() {
+                                                            if (user_weight == 0) {
+                                                                window.alert("You must be logged in to do that. Please log-in, it's easy and free.");
+                                                                return false;
+                                                            }
+                                                            jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "commented" },
+                                                                function(data){
+                                                                    location.href="/";
+                                                                }
+                                                            );
+                                    
+                                                            FB.ui({
+                                                                 method: 'stream.publish',
+                                                                 message: 'Help me explain our side of the story!',
+                                                                 attachment: {
+                                                                   name: '{{article.title}}',
+                                                                   caption: 'Help explain our side of the story by commenting in the comments section of this article',
+                                                                   href: '{{URL}}',
+                                                                   media: [ { type: 'image', src: 'http://israel-like.appspot.com/static/badge.png', href: '{{URL}}' } ]
+                                                                 },
+                                                                 action_links: [
+                                                                   { text: 'iLike-IL App', href: 'http://apps.facebook.com/ilike-il/' }
+                                                                 ],
+                                                                 user_message_prompt: 'Spread the word about this article so your friends can help too:'
+                                                               });
+                                                        }
+                                    
+                                                        function clk_nocomments() {
+                                                            if (user_weight == 0) {
+                                                                window.alert("You must be logged in to do that. Please log-in, it's easy and free.");
+                                                                return false;
+                                                            }
+                                                            jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "nocomments" },
+                                                                function(data){
+                                                                    location.href="/";
+                                                                }
+                                                            );
+                                                        }
+                                    
+                                                        function clk_notrelevant() {
+                                                            jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "notrelevant" },
+                                                                function(data){
+                                                                    location.href="/";
+                                                                }
+                                                            );
+                                                        }
+                                                        
+                                                        function clk_verified() {
+                                                            jQuery.get("ajax_handler", { article_id: "{{article.key}}", action: "verified" },
+                                                                function(data){
+                                                                    location.href="/";
+                                                                }
+                                                            );
+                                                        }
+                                    
+                                                       
+                                    
+                                                    
+                                
+                    
+        </script>
+    </head>
+    <style>
+        
+        #outer-separator {
+            clear: both;
+            width: 100%;
+            border-bottom: 2px solid #404040;
+            border-top: 1px solid #a0a0a0;
+            margin: 10px 0 0;
+            padding: 0;
+            font-size: 1px;
+            overflow: hidden
+        }
+        
+        #separator {
+            background: #eaeaea;
+            height: 3px
+        }
+        
+        table {
+            font-size: 100%
+        }
+    </style>
+    <body style="margin: 0px" style="overflow:hidden;">
+        <div id="fb-root">
+        </div>
+        <script src="http://connect.facebook.net/en_US/all.js">
+        </script>
+        <table cellpadding=0 cellspacing=0 id="toolkit" class="toolkit" border="0">
+            <tr height="1px">
+                <td colspan="4" style="top:0;width:100%">
+                   <!--   <div class=std style="background:#ebeff9;padding:3px 3px">  orig -->
+                   <div class=std style="background-image:url(/static/psd-banner-ilike_small.png) ;padding:3px 3px">                                      
+                        <a href="/" style="text-decoration:none"><img src="http://ilikeil.googlecode.com/svn/trunk/src/static/logo80.jpg" style="padding:0;margin:0;vertical-align:middle;border:0" title="Back to iLike-IL Home" alt="Back to iLike-IL Home" width=72 height=24><font color="white">to iLike-IL Home</font> </a>
+                        <div class="test" style="float: right;position:absolute;right:3px;top:3px;" >
+                            {{utext}}
+                        </div>
+                        </td>
+                    </div>
+                    </tr>
+                    <tr height="1%">
+                        <td width="50%" valign="middle">
+                            <div class="jcarousel-skin-tango" title="Tips - Use these helpful links as material for your comments">
+                                <ul id="mycarousel">
+                                    {% for tip in tips %}
+                                    <li>
+                                        <div class="articlebox">
+                                            <a href="{{tip.url}}" target="_blank" style="float: left; "><img
+{%  if tip.pic_url %}
+ src="{{tip.pic_url}}"
+{%  else %}
+ src="http://ilikeil.googlecode.com/svn/trunk/src/static/logo-heart.jpg"
+{%  endif %}
+ class="thumb"></a>
+                                            <div style="width: 300px; margin-left: 15px; float: left;">
+                                                <b style="margin-bottom: 5px; height: 30px;"><a target="_blank" href="{{tip.url}}">{{tip.title}}</a></b>
+                                                <span class="source">Keywords:<i>{%for keyw in tip.keywords%} {{keyw}}{%endfor%}</i></span>
+                                                <div style="height: 45px;">
+                                                    {{tip.desc}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                    {% if not tips %}
+                                    <li>
+                                        <small>
+                                            No Tips for keywords: <i>{%for keyw in article.keywords%} {{keyw}}{%endfor%}</i>
+                                        </small>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </td>
+                        <td style="padding-left:10px; padding-top:13px;" valign="top">
+                            <span id="relevance-text" title="Relevance Level - Use these buttons to influence the relevance level of this article. Click the <font color='green'><b>green</b></font> icon if you think it needs more commentors, click the <font color='red'><b>red</b></font> icon if you think otherwise" style="display:inline-block;">
+                            </span>
+                            <span title="Starred Articles - Star this article if you want to keep track of it. It will be highlighted in the main page" id="starred" style="display:inline-block;">
+                            </span>
+
+                            <span id="cmfbaptmdv1">
+                                <fb:like action='recommend' colorscheme='light' href='{{URL}}' layout='standard' show_faces='false' width='408'/>
+                            </span><!--<iframe src="http://www.facebook.com/plugins/like.php?href={{URL}}&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=recommend&amp;font=arial&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:35px;" allowTransparency="true"></iframe>-->
+
+                            <a href="{{URL}}&min=t" style="text-decoration: none; color: black">Minimize this frame</a>&nbsp;|&nbsp;<a href="{{article.url}}" style="text-decoration: none; color: black">Link to original article</a>
+                            <!--<a href="http://www.facebook.com/sharer.php?u=http://israel-like.appspot.com/article%3Fkey%3D{{article.key}}&t=Come help me on iLike-IL - {{article.title}}"><img src="static/fshare.gif"></a>-->
+                        </td>
+                        <td>
+                            {% if not did_user_already_comment %} <a id="acommented" title=" - Click here once you have commented on this article, so we know how many commented through iLike-IL" href="#" style="text-decoration:none; color:black;" onclick="javascript:clk_commented();">
+                                <div >
+                                    <img src="static/badge.png" width="80px" height="80px">
+                                </div>
+                            </a>{% endif %}
+                        </td>
+                        <td style="padding-right: 10px; padding-left: 10px; padding-top: 20px;" valign="top">
+                            <div class="userlinks">
+                                {% if not did_user_already_comment and article.unverified%} <a id="anocomments" title=" - Click here if this site has no comments section, so we don't waste your time in the future"href="#" style="text-decoration:underline; color:black;" onclick="javascript:clk_nocomments();">
+                                    <font size="2px">No comments section</font>
+                                </a><br>
+                                {% endif %}  
+                                {% if is_poweruser_or_admin and article.unverified %} 
+                                <a id="anotrelevant" title =" - Click here if you think this article is totally irrelevant to the state of Israel"href="#" style="text-decoration:underline; color:black;" onclick="javascript:clk_notrelevant();">
+                                    <font size="2px">Article totally irrelevant</font>
+                                </a>
+								<br>
+                                <a id="averified" title =" - Click here if you think this article is relevant to the state of Israel"href="#" style="text-decoration:underline; color:black;" onclick="javascript:clk_verified();">
+                                    <font size="2px">Mark article as relevant</font>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr height="1px">
+                        <td colspan="4">
+                            <div id=outer-separator>
+                                <div id=separator>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                        <iframe allowtransparency=true frameborder=0 id=rf sandbox="allow-same-origin allow-forms allow-scripts" scrolling=auto src="{{article.url}}" style="width:100%;height:100%">
+                        </iframe>
+                        </table>
+                        <script type="text/javascript">
+                            var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
+                            document.write(unescape("%3Cscript src='" + rpxJsHost +
+                            "rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E"));
+                        </script>
+                        <script type="text/javascript">
+                            RPXNOW.overlay = true;
+                            RPXNOW.language_preference = 'en';
+                        </script>
+                    </body>
+                    <script>
+                        var a = document.getElementById('rf');
+                        a && a.contentWindow && a.contentWindow.focus();
+                    </script>
+                    </html>

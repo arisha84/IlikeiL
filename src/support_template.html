@@ -1,0 +1,61 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+<div class="content">
+<div style="padding-left: 60px">
+<h1>We've tried our best... but,</h1>
+We might have a few glitches as we are still in BETA. Please tell us about it:
+<p></p>
+<form method="POST" action="/support" id="form1">
+    <table>
+        <tr>
+            <td>Please enter your name:</td>
+            <td><input type="text" name="feedback_name" id="feedback_name" value="{%if uname%}{{uname}}{%else%}name{%endif%}"></td>
+        </tr>
+        <tr>
+        <td>Please enter your e-mail for any follow-ups:</td>
+        <td><input name="feedback_email" id="feedback_email" value="e-mail"></td>
+        </tr>
+        <tr><td colspan="2"><textarea name="feedback_text" id="feedback_text" rows="10" cols="80"></textarea></td></tr>
+        <tr><td colspan="2"><center><input type="submit" value="Send Feedback"></center></td></tr>
+    </table>
+     
+
+    
+    <br>
+</form>
+</div></div>
+{% endblock %}
+
+
+{% block bottom %}
+    <table width="95%" align="center" cellpadding="3" cellspacing="0" bgcolor="#C3D9FF" style="margin-bottom:5">
+  <tbody><tr>
+  <td class="bubble tl" align="left" valign="top"><div class="SPRITE_corner_tl"></div></td>
+  <td class="bubble" rowspan="2" style="text-align:left">
+  <div align="center">
+  <font size="-1" color="#666666">Google Technologies for Cloud Development Workshop 2010
+  <a href="about">About</a> -
+  <a href="http://code.google.com/p/ilikeil/">Development</a> -
+  <a href="support">Support</a>
+  </font>
+  </div>
+  </td>
+  <td class="bubble tr" align="right" valign="top"><div class="SPRITE_corner_tr"></div></td>
+  </tr>
+  <tr>
+  <td class="bubble bl" align="left" valign="bottom"><div class="SPRITE_corner_bl"></div></td>
+  <td class="bubble br" align="right" valign="bottom"><div class="SPRITE_corner_br"></div></td>
+  </tr>
+</tbody></table>
+    <script type="text/javascript">
+  var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
+  document.write(unescape("%3Cscript src='" + rpxJsHost +
+"rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  RPXNOW.overlay = true;
+  RPXNOW.language_preference = 'en';
+</script>
+{% endblock %}

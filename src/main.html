@@ -1,0 +1,57 @@
+<!doctype html><html>
+  <head>
+  	<title>iLike-IL</title>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="static/heart.ico">
+    <link type="text/css" rel="stylesheet" href="static/common.css">
+    <link type="text/css" rel="stylesheet" href="static/jquery-autocomplete/jquery.autocomplete.css">
+    <script type="text/javascript" src="static/jquery-ui-1.7.3/js/jquery-1.3.2.min.js"></script>
+    <!--<script type="text/javascript" src="static/jquery-autocomplete/lib/jquery.js"></script>-->
+    <script type="text/javascript" src="static/jquery-autocomplete/jquery.autocomplete.js"></script>
+    {% block head %}<link type="text/css" rel="stylesheet" href="static/boxes.css">
+    <link type="text/css" rel="stylesheet" href="static/slideshow/style.css">{% endblock %}
+    {% block analytics %}
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16984262-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+    
+    {% endblock %}
+  </head> 
+  <body>
+  	<div class="menudiv"> 
+	<div class="topcenter" id="centerdiv">
+      <table class="menu">
+      <tr>
+      <td>         
+      <span class="logo"><a title="iLike-IL" href={% block logourl %} "/" {% endblock %} ><img src="static/logo80.jpg" alt="ilikeil"></img></a>
+      </span>
+      </td>
+      <td style="padding-left:20px;padding-top:20px">
+      {% block search %}{% endblock %}
+      </td>
+      <td>
+		{% block user %}{% endblock %}
+        
+       </td>
+       </tr>
+       </table>
+	   </div>
+ 	</div>
+    
+        {% block content %}{% endblock %}            
+    
+    <br>
+    <div>
+    {%block bottom%}{% endblock %}
+    </div>
+  </body>
+</html>

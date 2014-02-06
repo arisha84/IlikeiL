@@ -1,0 +1,32 @@
+.articlebox {
+	background-color:white;
+	border:0px solid silver;
+	clear:none;
+	color:#333333;
+	float:left;
+	font-size:0.85em;
+	height:92px;
+	margin:10px;
+	margin-left:0px;
+	padding:5px;
+	padding-left:0px;
+	width:478px;
+}
+
+.articlebox a {
+	font-size:1.1em;
+}
+
+.articlebox-text {
+    width: 350px;
+	float: left;
+    margin-left: 5px;
+}
+
+.menulinks {
+    width: 339px;
+    font-size: 0.9em;
+    float: right;
+    padding: 30px 0px 30px 0px;
+	
+}
