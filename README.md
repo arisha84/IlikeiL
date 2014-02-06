@@ -30,14 +30,14 @@ We also scheduled article recalculation process which updates the rank of the ar
 Consists page handlers, templates, javascript and JQuery scripts. Responsible for authenticating the user, page rendering and processing user input. Also consists the admin interface that allows editing the system entities.
 
 ### Features
-o Search and Analyze articles on Israel including talkback recognition, keywords analysis etc.
-o Use a ranking algorithm to classify the articles based on their importance, and present the articles to the users based on their classification.
-o The toolkit- help the user by presenting relevant tips and articles management buttons.
-o Users support- allow users to register to the website using different accounts, and give preferred users with special capabilities.
-o Monitoring- allow users to save information about articles- favorites, commented, relevant/irrelevant articles, as well as effect articles importance according to users actions.
-o Keywords search- allow users to search for specific articles based on one or more keywords from the keywords database.
-o Admin capabilities- allow admin users to manually add tips and keywords, manage sources and keywords priorities, and verify new (unverified) articles.
-o Articles addition- allow users to manually add new articles easily using a special bookmarklet / favorites button.
-o Language support- Spanish is also supported in addition to English, and other languages which are supported by google news can be easily added later.
-o Facebook integration- Turn iLike-IL into a Facebook application.
+* Search and Analyze articles on Israel including talkback recognition, keywords analysis etc.
+* Use a ranking algorithm to classify the articles based on their importance, and present the articles to the users based on their classification.
+* The toolkit- help the user by presenting relevant tips and articles management buttons.
+* Users support- allow users to register to the website using different accounts, and give preferred users with special capabilities.
+* Monitoring- allow users to save information about articles- favorites, commented, relevant/irrelevant articles, as well as effect articles importance according to users actions.
+* Keywords search- allow users to search for specific articles based on one or more keywords from the keywords database.
+* Admin capabilities- allow admin users to manually add tips and keywords, manage sources and keywords priorities, and verify new (unverified) articles.
+* Articles addition- allow users to manually add new articles easily using a special bookmarklet / favorites button.
+* Language support- Spanish is also supported in addition to English, and other languages which are supported by google news can be easily added later.
+* Facebook integration- Turn iLike-IL into a Facebook application.
 
