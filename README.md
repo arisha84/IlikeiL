@@ -17,7 +17,27 @@ The goal of this application is to allow an easy and convenient way to search ar
 Registered users can save and track history of their activities, including articles they commented on, marked as favorites and/or marked as relevant/irrelevant.
 In addition- users, and especially preferred users and admins- can effect on the articles ranking and relevance with their ranking
 
-#Architecture
-##Overview
+# Architecture
+## Overview
 Our application was designed so that it could easily be changed to be a different PR application- by simply changing the keywords used for the article searching and analysis, the application can allow searching of articles on about any subject, thus allowing company representatives to easily find and comment on negative articles on their company.
 Backend
+
+## Backend
+The backend is responsible for processing and finally inserting new articles to the datastore. Using cron jobs (and task queues) we are scheduling our article "pipeline" which puts a new article through a series of checks (explained later). Afterwards, if qualified, the backend is responsible to add the article to the system. This includes, adding a newly discovered source to the DB, updating the cache and so on.
+We also scheduled article recalculation process which updates the rank of the article which is described later.
+
+## Frontend
+Consists page handlers, templates, javascript and JQuery scripts. Responsible for authenticating the user, page rendering and processing user input. Also consists the admin interface that allows editing the system entities.
+
+### Features
+o Search and Analyze articles on Israel including talkback recognition, keywords analysis etc.
+o Use a ranking algorithm to classify the articles based on their importance, and present the articles to the users based on their classification.
+o The toolkit- help the user by presenting relevant tips and articles management buttons.
+o Users support- allow users to register to the website using different accounts, and give preferred users with special capabilities.
+o Monitoring- allow users to save information about articles- favorites, commented, relevant/irrelevant articles, as well as effect articles importance according to users actions.
+o Keywords search- allow users to search for specific articles based on one or more keywords from the keywords database.
+o Admin capabilities- allow admin users to manually add tips and keywords, manage sources and keywords priorities, and verify new (unverified) articles.
+o Articles addition- allow users to manually add new articles easily using a special bookmarklet / favorites button.
+o Language support- Spanish is also supported in addition to English, and other languages which are supported by google news can be easily added later.
+o Facebook integration- Turn iLike-IL into a Facebook application.
+
